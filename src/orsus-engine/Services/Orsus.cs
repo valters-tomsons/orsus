@@ -11,12 +11,13 @@ namespace orsus_engine.Services
     {
         private Sdl2Window _window;
         private GraphicsDevice _device;
-        private readonly IOrsusScene _scene = new ColorQuad();
+        private readonly IOrsusScene _scene;
         private readonly InputHandler _inputHandler = new InputHandler();
         private readonly ConfigurationManager _configuration = new ConfigurationManager();
 
-        public Orsus()
+        public Orsus(IOrsusScene scene)
         {
+            _scene = scene;
             _inputHandler.orsusCallback = InputCallback;
         }
 
