@@ -5,7 +5,7 @@ namespace orsus_engine.Services
 {
     public class InputHandler
     {
-        public Action resPlus;
+        public Action orsusCallback;
 
         public InputHandler()
         {
@@ -18,9 +18,9 @@ namespace orsus_engine.Services
             
             foreach (var key in keys)
             {
-                if(key.Key == Key.Plus && key.Down)
+                if(key.Key == Key.F11 && key.Down)
                 {
-                    resPlus();
+                    orsusCallback();
                 }
             }
         }
