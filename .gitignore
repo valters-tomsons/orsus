@@ -361,3 +361,6 @@ MigrationBackup/
 
 # VScode directory
 .vscode/
+
+# Ignore orsus artifacts directory
+artifacts/
