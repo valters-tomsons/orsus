@@ -5,7 +5,7 @@ using Veldrid;
 using Veldrid.SPIRV;
 using orsus_engine.Models;
 
-namespace orsus_engine
+namespace orsus_engine.Services
 {
     public class GraphicsManager
     {

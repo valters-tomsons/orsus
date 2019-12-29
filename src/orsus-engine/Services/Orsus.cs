@@ -2,7 +2,7 @@ using Veldrid;
 using Veldrid.Sdl2;
 using Veldrid.StartupUtilities;
 
-namespace orsus_engine
+namespace orsus_engine.Services
 {
     public class Orsus
     {

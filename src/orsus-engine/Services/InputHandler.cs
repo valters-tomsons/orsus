@@ -1,7 +1,7 @@
 using System;
 using Veldrid;
 
-namespace orsus_engine
+namespace orsus_engine.Services
 {
     public class InputHandler
     {
