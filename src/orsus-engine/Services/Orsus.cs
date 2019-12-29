@@ -11,7 +11,7 @@ namespace orsus_engine.Services
     {
         private Sdl2Window _window;
         private GraphicsDevice _device;
-        private readonly IOrsusScene _manager = new ColorQuad();
+        private readonly IOrsusScene _scene = new ColorQuad();
         private readonly InputHandler _inputHandler = new InputHandler();
         private readonly ConfigurationManager _configuration = new ConfigurationManager();
 
@@ -42,14 +42,14 @@ namespace orsus_engine.Services
 
         private void Start(Sdl2Window window, GraphicsDevice device)
         {
-            _manager.CreateResources(device);
+            _scene.CreateResources(device);
 
             while (window.Exists)
             {
                 var input = window.PumpEvents();
                 _inputHandler.HandleInputs(input);
 
-                _manager.Draw(device);
+                _scene.Draw(device);
             }
 
             DisposeResources(device);
@@ -57,7 +57,7 @@ namespace orsus_engine.Services
 
         private void DisposeResources(GraphicsDevice device)
         {
-            _manager.DisposeResources();
+            _scene.DisposeResources();
             device.Dispose();
         }
 
