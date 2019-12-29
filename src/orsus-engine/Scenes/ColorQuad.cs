@@ -6,9 +6,9 @@ using Veldrid.SPIRV;
 using orsus_engine.Structs;
 using orsus_engine.Interfaces;
 
-namespace orsus_engine.Services
+namespace orsus_engine.Scenes
 {
-    public class GraphicsManager : IOrsusScene
+    public class ColorQuad : IOrsusScene
     {
         private static CommandList _commandList;
         private static DeviceBuffer _vertexBuffer;
@@ -16,7 +16,7 @@ namespace orsus_engine.Services
         private static Shader[] _shaders;
         private static Pipeline _pipeline;
 
-        public GraphicsManager() { }
+        public ColorQuad() { }
 
         public void CreateResources(GraphicsDevice device)
         {
