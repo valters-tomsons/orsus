@@ -3,7 +3,7 @@ using System.Numerics;
 using System.Text;
 using Veldrid;
 using Veldrid.SPIRV;
-using orsus_engine.Models;
+using orsus_engine.Structs;
 
 namespace orsus_engine.Services
 {

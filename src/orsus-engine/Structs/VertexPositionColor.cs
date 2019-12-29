@@ -1,7 +1,7 @@
 using System.Numerics;
 using Veldrid;
 
-namespace orsus_engine.Models
+namespace orsus_engine.Structs
 {
     public struct VertexPositionColor
     {

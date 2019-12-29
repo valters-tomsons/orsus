@@ -1,3 +1,4 @@
+using orsus_engine.Structs;
 using Veldrid;
 using Veldrid.Sdl2;
 using Veldrid.StartupUtilities;
@@ -10,15 +11,16 @@ namespace orsus_engine.Services
         private GraphicsDevice _device;
         private readonly GraphicsManager _manager = new GraphicsManager();
         private readonly InputHandler _inputHandler = new InputHandler();
+        private readonly ConfigurationManager _configuration = new ConfigurationManager();
         
         public Orsus()
         {
 
         }
 
-        public void Start(WindowCreateInfo windowInfo)
+        public void Start(ScreenResolution resolution)
         {
-            _window = CreateWindow(windowInfo);
+            _window = CreateWindow(resolution);
             _device = InitializeGraphicsDevice(_window);
 
             Start(_window, _device);
@@ -45,8 +47,16 @@ namespace orsus_engine.Services
             device.Dispose();
         }
 
-        private Sdl2Window CreateWindow(WindowCreateInfo windowInfo)
+        private Sdl2Window CreateWindow(ScreenResolution resolution)
         {
+            var osDesc = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
+            var windowInfo = new WindowCreateInfo
+            {
+                WindowWidth = resolution.Width,
+                WindowHeight = resolution.Height,
+                WindowTitle = $"{_configuration.GetConfiguration().WindowTitle} ({osDesc})"
+            };
+
             var window = VeldridStartup.CreateWindow(ref windowInfo);
             return window;
         }
@@ -55,7 +65,7 @@ namespace orsus_engine.Services
         {
             var options = new GraphicsDeviceOptions
             {
-                Debug = false
+                Debug = _configuration.GetConfiguration().EnableVulkanDebug
             };
 
             var device = VeldridStartup.CreateVulkanGraphicsDevice(options, window);

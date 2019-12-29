@@ -1,4 +1,5 @@
 ﻿using orsus_engine.Services;
+using orsus_engine.Structs;
 using Veldrid.StartupUtilities;
 
 namespace orsus_engine
@@ -9,14 +10,8 @@ namespace orsus_engine
 
         static void Main(string[] args)
         {
-            var windowInfo = new WindowCreateInfo()
-            {
-                WindowWidth = 1920,
-                WindowHeight = 1080,
-                WindowTitle = "Orsus",
-            };
-
-            engine.Start(windowInfo);
+            var resolution = new ScreenResolution(1920,1080);
+            engine.Start(resolution);
         }
     }
 }
