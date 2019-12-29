@@ -3,8 +3,9 @@ using System.Numerics;
 using System.Text;
 using Veldrid;
 using Veldrid.SPIRV;
+using orsus_engine.Models;
 
-namespace orsus_game
+namespace orsus_engine
 {
     public class GraphicsManager
     {
