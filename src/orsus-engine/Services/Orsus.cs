@@ -55,8 +55,7 @@ namespace orsus_engine.Services
         {
             var options = new GraphicsDeviceOptions
             {
-                Debug = false,
-                PreferStandardClipSpaceYDirection = true
+                Debug = false
             };
 
             var device = VeldridStartup.CreateVulkanGraphicsDevice(options, window);

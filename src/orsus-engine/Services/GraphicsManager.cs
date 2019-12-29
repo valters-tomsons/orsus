@@ -71,10 +71,10 @@ namespace orsus_engine.Services
         private VertexPositionColor[] GenerateDemo()
         {
             VertexPositionColor[] quadVertices = {
-                new VertexPositionColor(new Vector2(-.75f, .75f), RgbaFloat.Red),
-                new VertexPositionColor(new Vector2(.75f, .75f), RgbaFloat.Green),
-                new VertexPositionColor(new Vector2(-.75f, -.75f), RgbaFloat.Blue),
-                new VertexPositionColor(new Vector2(.75f, -.75f), RgbaFloat.Yellow)
+                new VertexPositionColor(new Vector2(-1.0f, -1.0f), RgbaFloat.Red),
+                new VertexPositionColor(new Vector2(1.0f, -1.0f), RgbaFloat.Green),
+                new VertexPositionColor(new Vector2(-1.0f, 1.0f), RgbaFloat.Blue),
+                new VertexPositionColor(new Vector2(1.0f, 1.0f), RgbaFloat.Yellow)
             };
 
             return quadVertices;
