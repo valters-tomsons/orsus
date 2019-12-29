@@ -4,10 +4,11 @@ using System.Text;
 using Veldrid;
 using Veldrid.SPIRV;
 using orsus_engine.Structs;
+using orsus_engine.Interfaces;
 
 namespace orsus_engine.Services
 {
-    public class GraphicsManager
+    public class GraphicsManager : IOrsusScene
     {
         private static CommandList _commandList;
         private static DeviceBuffer _vertexBuffer;

@@ -1,3 +1,4 @@
+using orsus_engine.Interfaces;
 using orsus_engine.Structs;
 using Veldrid;
 using Veldrid.Sdl2;
@@ -9,7 +10,7 @@ namespace orsus_engine.Services
     {
         private Sdl2Window _window;
         private GraphicsDevice _device;
-        private readonly GraphicsManager _manager = new GraphicsManager();
+        private readonly IOrsusScene _manager = new GraphicsManager();
         private readonly InputHandler _inputHandler = new InputHandler();
         private readonly ConfigurationManager _configuration = new ConfigurationManager();
 
