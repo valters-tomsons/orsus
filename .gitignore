@@ -364,3 +364,6 @@ MigrationBackup/
 
 # Ignore orsus artifacts directory
 artifacts/
+
+# Orsus configuration
+**/orsus.config.json

@@ -4,11 +4,9 @@ namespace orsus_engine.Models
     {
         public OrsusConfiguration()
         {
-            EnableVulkanDebug = false;
-            WindowTitle = "Orsus";
         }
 
-        public bool EnableVulkanDebug { get; private set; }
-        public string WindowTitle { get; private set; }
+        public bool EnableVulkanDebug { get; private set; } = false;
+        public string WindowTitle { get; private set; } = "Orsus";
     }
 }
