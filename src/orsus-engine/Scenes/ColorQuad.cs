@@ -91,8 +91,8 @@ namespace orsus_engine.Scenes
             var vertexCode = _shaderLoader.GetShaderByteCodeFromFileAsync(vertexShaderPath).Result;
             var fragmentCode = _shaderLoader.GetShaderByteCodeFromFileAsync(fragmentShaderPath).Result;
 
-            var vertexShaderDesc = new ShaderDescription(ShaderStages.Vertex, vertexCode, "main");
-            var fragmentShaderDesc = new ShaderDescription(ShaderStages.Fragment, fragmentCode, "main");
+            var vertexShaderDesc = new ShaderDescription(ShaderStages.Vertex, vertexCode, ShaderLoader.ShaderEntrypoint);
+            var fragmentShaderDesc = new ShaderDescription(ShaderStages.Fragment, fragmentCode, ShaderLoader.ShaderEntrypoint);
 
             _shaders = factory.CreateFromSpirv(vertexShaderDesc, fragmentShaderDesc);
         }

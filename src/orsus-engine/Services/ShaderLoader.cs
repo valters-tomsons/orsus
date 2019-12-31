@@ -6,6 +6,8 @@ namespace orsus_engine.Services
 {
     public class ShaderLoader
     {
+        public static readonly string ShaderEntrypoint = "main";
+
         public async Task<byte[]> GetShaderByteCodeFromFileAsync(string filePath)
         {
             var shaderCode = await File.ReadAllTextAsync(filePath);
