@@ -69,7 +69,9 @@ namespace orsus_engine.Services
             {
                 WindowWidth = resolution.Width,
                 WindowHeight = resolution.Height,
-                WindowTitle = $"{_configuration.GetConfiguration().WindowTitle} ({osDesc})"
+                WindowTitle = $"{_configuration.GetConfiguration().WindowTitle} ({osDesc})",
+                X = Sdl2Native.SDL_WINDOWPOS_CENTERED,
+                Y = Sdl2Native.SDL_WINDOWPOS_CENTERED
             };
 
             var window = VeldridStartup.CreateWindow(ref windowInfo);
