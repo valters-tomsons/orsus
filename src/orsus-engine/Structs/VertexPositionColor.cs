@@ -14,6 +14,8 @@ namespace orsus_engine.Structs
             Color = color;
         }
         
+        // Float size = 32 bytes = 4 bits
+        // Vec2 (4 + 4) + RgbaF (4 * 4)
         public const uint SizeInBytes = 24;
     }
 }

@@ -9,7 +9,8 @@ namespace orsus_engine
     {
         static void Main(string[] args)
         {
-            var scene = new ColorQuad();
+            // var scene = new ColorQuad();
+            var scene = new TextureCube();
             var engine = new Orsus(scene);
 
             var resolution = new ScreenResolution(1920,1080);
