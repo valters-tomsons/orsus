@@ -5,6 +5,7 @@ using Veldrid;
 using Veldrid.SPIRV;
 using orsus_engine.Structs;
 using orsus_engine.Interfaces;
+using orsus_engine.Services;
 
 namespace orsus_engine.Scenes
 {
@@ -15,6 +16,7 @@ namespace orsus_engine.Scenes
         private static DeviceBuffer _indexBuffer;
         private static Shader[] _shaders;
         private static Pipeline _pipeline;
+        private static readonly ShaderLoader _shaderLoader = new ShaderLoader();
 
         public ColorQuad() { }
 
@@ -83,8 +85,11 @@ namespace orsus_engine.Scenes
 
         private void CreateShaders(ResourceFactory factory)
         {
-            var vertexCode = Encoding.UTF8.GetBytes(File.ReadAllText("Shaders/VertexCode.glsl"));
-            var fragmentCode = Encoding.UTF8.GetBytes(File.ReadAllText("Shaders/FragmentCode.glsl"));
+            var vertexShaderPath = "Shaders/ColorQuad/VertexCode.glsl";
+            var fragmentShaderPath = "Shaders/ColorQuad/FragmentCode.glsl";
+
+            var vertexCode = _shaderLoader.GetShaderByteCodeFromFileAsync(vertexShaderPath).Result;
+            var fragmentCode = _shaderLoader.GetShaderByteCodeFromFileAsync(fragmentShaderPath).Result;
 
             var vertexShaderDesc = new ShaderDescription(ShaderStages.Vertex, vertexCode, "main");
             var fragmentShaderDesc = new ShaderDescription(ShaderStages.Fragment, fragmentCode, "main");
