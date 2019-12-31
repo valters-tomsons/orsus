@@ -6,7 +6,7 @@ namespace orsus_engine.Models
         {
         }
 
-        public bool EnableVulkanDebug { get; private set; } = false;
-        public string WindowTitle { get; private set; } = "Orsus";
+        public bool EnableVulkanDebug { get; set; } = false;
+        public string WindowTitle { get; set; } = "Orsus";
     }
 }
