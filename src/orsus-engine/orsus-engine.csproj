@@ -6,8 +6,8 @@
     <RootNamespace>orsus_game</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Veldrid" Version="4.5.0"/>
-    <PackageReference Include="Veldrid.StartupUtilities" Version="4.5.0"/>
-    <PackageReference Include="Veldrid.SPIRV" Version="1.0.7"/>
+    <PackageReference Include="Veldrid" Version="4.7.0"/>
+    <PackageReference Include="Veldrid.StartupUtilities" Version="4.7.0"/>
+    <PackageReference Include="Veldrid.SPIRV" Version="1.0.12"/>
   </ItemGroup>
 </Project>
