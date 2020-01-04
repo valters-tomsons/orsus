@@ -1,11 +1,9 @@
-using System.IO;
 using System.Numerics;
-using System.Text;
 using Veldrid;
 using Veldrid.SPIRV;
 using orsus_engine.Structs;
 using orsus_engine.Interfaces;
-using orsus_engine.Services;
+using orsus_engine.Services.Shaders;
 
 namespace orsus_engine.Scenes
 {

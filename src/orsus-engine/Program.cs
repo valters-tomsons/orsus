@@ -13,7 +13,7 @@ namespace orsus_engine
             // var scene = new TextureCube();
             var engine = new Orsus(scene);
 
-            var resolution = new ScreenResolution(1280, 720);
+            var resolution = new ScreenResolution(1920, 1080);
             engine.Start(resolution);
         }
     }

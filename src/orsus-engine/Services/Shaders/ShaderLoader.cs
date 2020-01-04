@@ -2,7 +2,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace orsus_engine.Services
+namespace orsus_engine.Services.Shaders
 {
     public class ShaderLoader
     {
