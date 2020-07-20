@@ -1,9 +1,12 @@
+using System;
+using System.Text;
 using orsus_engine.Interfaces;
-using orsus_engine.Structs;
 using orsus_engine.Scenes;
+using orsus_engine.Structs;
 using Veldrid;
 using Veldrid.Sdl2;
 using Veldrid.StartupUtilities;
+using Vulkan;
 
 namespace orsus_engine.Services
 {
@@ -26,7 +29,31 @@ namespace orsus_engine.Services
             _window = CreateWindow(resolution);
             _device = InitializeGraphicsDevice(_window);
 
+            PrintName(_device);
+
             Start(_window, _device);
+        }
+
+        private unsafe void PrintName(GraphicsDevice device)
+        {
+            var vkInfo = device.GetVulkanInfo();
+            VulkanNative.vkGetPhysicalDeviceProperties(vkInfo.PhysicalDevice, out VkPhysicalDeviceProperties properties);
+
+            const uint max = RawConstants.VK_MAX_PHYSICAL_DEVICE_NAME_SIZE;
+
+            var kk = properties.deviceName;
+            var nameArray = new byte[max];
+            for (int i = 0; i < max; i++)
+            {
+                var val = kk[i];
+                if (val != 0)
+                {
+                    nameArray[i] = kk[i];
+                }
+            }
+
+            var str = Encoding.UTF8.GetString(nameArray);
+            Console.WriteLine(str);
         }
 
         private void InputCallback()
@@ -35,7 +62,7 @@ namespace orsus_engine.Services
             {
                 _window.WindowState = WindowState.BorderlessFullScreen;
             }
-            else if(_window.WindowState == WindowState.BorderlessFullScreen)
+            else if (_window.WindowState == WindowState.BorderlessFullScreen)
             {
                 _window.WindowState = WindowState.Normal;
             }
@@ -82,7 +109,7 @@ namespace orsus_engine.Services
         {
             var options = new GraphicsDeviceOptions
             {
-                Debug = _configuration.GetConfiguration().EnableVulkanDebug
+                Debug = _configuration.GetConfiguration().EnableVulkanDebug,
             };
 
             var device = VeldridStartup.CreateVulkanGraphicsDevice(options, window);
