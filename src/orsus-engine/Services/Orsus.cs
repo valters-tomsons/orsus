@@ -29,12 +29,12 @@ namespace orsus_engine.Services
             _window = CreateWindow(resolution);
             _device = InitializeGraphicsDevice(_window);
 
-            PrintName(_device);
+            PrintGraphicsDeviceName(_device);
 
             Start(_window, _device);
         }
 
-        private unsafe void PrintName(GraphicsDevice device)
+        private unsafe void PrintGraphicsDeviceName(GraphicsDevice device)
         {
             var vkInfo = device.GetVulkanInfo();
             VulkanNative.vkGetPhysicalDeviceProperties(vkInfo.PhysicalDevice, out VkPhysicalDeviceProperties properties);
@@ -43,16 +43,24 @@ namespace orsus_engine.Services
 
             var kk = properties.deviceName;
             var nameArray = new byte[max];
+
+            int lastEmptyIndex = 0;
+
             for (int i = 0; i < max; i++)
             {
                 var val = kk[i];
+
                 if (val != 0)
                 {
                     nameArray[i] = kk[i];
                 }
+                else if(val == 0 && kk[i-1] != 0)
+                {
+                    lastEmptyIndex = i;
+                }
             }
 
-            var str = Encoding.UTF8.GetString(nameArray);
+            var str = Encoding.UTF8.GetString(nameArray, 0, lastEmptyIndex);
             Console.WriteLine(str);
         }
 
