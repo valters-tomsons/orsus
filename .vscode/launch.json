@@ -17,7 +17,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build-opengl",
-            "program": "${workspaceFolder}/src/orsus-opengl/bin/Debug/netcoreapp3.1/orsus-opengl.dll",
+            "program": "${workspaceFolder}/src/orsus-opengl/bin/Debug/netcoreapp3.1/linux-x64/orsus-opengl.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/orsus-opengl",
             "console": "internalConsole",

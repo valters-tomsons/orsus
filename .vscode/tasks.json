@@ -19,9 +19,11 @@
             "type": "process",
             "args": [
                 "build",
+                "-r",
+                "linux-x64",
                 "${workspaceFolder}/src/orsus-opengl/orsus-opengl.csproj",
                 "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "/consoleloggerparameters:NoSummary",
             ],
             "problemMatcher": "$msCompile"
         },

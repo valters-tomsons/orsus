@@ -3,8 +3,9 @@
     <OutputType>WinExe</OutputType>
 
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RuntimeIdentifiers>linux-x64</RuntimeIdentifiers>
+    <RuntimeIdentifiers>linux-x64;win-x64</RuntimeIdentifiers>
 
+    <PublishSingleFile>true</PublishSingleFile>
     <PublishReadyToRun>false</PublishReadyToRun>
     <TieredCompilation>false</TieredCompilation>
   </PropertyGroup>
@@ -34,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MonoGame.Extended.Animations" Version="3.7.0" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
   </ItemGroup>

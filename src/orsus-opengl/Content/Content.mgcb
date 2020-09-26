@@ -25,3 +25,10 @@
 /processorParam:TextureFormat=Color
 /build:merchant_idle.png
 
+#begin Roboto.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Roboto.spritefont
+
