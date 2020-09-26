@@ -30,7 +30,7 @@ namespace orsus_opengl
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            var charTex = Content.Load<Texture2D>("idle");
+            var charTex = Content.Load<Texture2D>("merchant_idle");
             _character = new SpriteSheet(charTex, 4, 64);
         }
 
