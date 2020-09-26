@@ -1,7 +1,6 @@
 using System;
 using System.Text;
 using orsus_engine.Interfaces;
-using orsus_engine.Scenes;
 using orsus_engine.Structs;
 using Veldrid;
 using Veldrid.Sdl2;
