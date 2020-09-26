@@ -1,0 +1,33 @@
+{
+   "version": "0.2.0",
+   "configurations": [
+        {
+            "name": "Launch Orsus (Vulkan)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/orsus-vulkan/bin/Debug/netcoreapp3.1/orsus-vulkan.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/orsus-vulkan",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Orsus (OpenGL)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/orsus-opengl/bin/Debug/netcoreapp3.1/orsus-vulkan.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/orsus-opengl",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        }
+    ]
+}
