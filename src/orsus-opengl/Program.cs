@@ -5,10 +5,10 @@ namespace orsus_opengl
     public static class Program
     {
         [STAThread]
-        static void Main()
+        internal static void Main()
         {
-            using (var game = new Game1())
-                game.Run();
+            using var game = new OrsusGame();
+            game.Run();
         }
     }
 }

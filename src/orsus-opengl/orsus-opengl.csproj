@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <RootNamespace>orsus_opengl</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
