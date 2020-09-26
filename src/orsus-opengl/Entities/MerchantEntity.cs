@@ -39,10 +39,35 @@ namespace orsus_opengl.Entities
             _animations.Add(type, animation);
         }
 
+        public void Idle()
+        {
+            CurrentAnimation = _animations[AnimationType.Idle];
+        }
+
+        public void WalkLeft()
+        {
+            CurrentAnimation = _animations[AnimationType.Walk];
+            SetEffect(SpriteEffects.FlipHorizontally);
+        }
+
+        public void WalkRight()
+        {
+            CurrentAnimation = _animations[AnimationType.Walk];
+            SetEffect(SpriteEffects.None);
+        }
+
         public void SetAnimationType(AnimationType type)
         {
             if(_animations[type] != CurrentAnimation)
             CurrentAnimation = _animations[type];
+        }
+
+        private void SetEffect(SpriteEffects effect)
+        {
+            foreach(var animation in _animations.Values)
+            {
+                animation.Effect = effect;
+            }
         }
 
         public void Update(GameTime gameTime)
@@ -53,9 +78,9 @@ namespace orsus_opengl.Entities
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position, float rotation = 0)
+        public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            CurrentAnimation.Draw(spriteBatch, position, rotation, new Vector2(15));
+            CurrentAnimation.Draw(spriteBatch, position, 0f, new Vector2(15));
         }
     }
 }

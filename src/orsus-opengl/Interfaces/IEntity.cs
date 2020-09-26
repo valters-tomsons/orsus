@@ -13,6 +13,9 @@ namespace orsus_opengl.Interfaces
         void AddAnimationFrames(AnimationType type, SpriteSheet spriteSheet, float frameDuration = 0.2f);
         void SetAnimationType(AnimationType type);
         void Update(GameTime gameTime);
-        void Draw(SpriteBatch spriteBatch, Vector2 position, float rotation = 0);
+        void Draw(SpriteBatch spriteBatch, Vector2 position);
+        void WalkLeft();
+        void WalkRight();
+        void Idle();
     }
 }

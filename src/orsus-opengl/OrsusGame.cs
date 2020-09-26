@@ -63,10 +63,14 @@ namespace orsus_opengl
 
             if(Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                _merchant.SetAnimationType(AnimationType.Walk);
+                _merchant.WalkRight();
+            }
+            else if(Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                _merchant.WalkLeft();
             }
             else{
-                _merchant.SetAnimationType(AnimationType.Idle);
+                _merchant.Idle();
             }
 
             _frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
