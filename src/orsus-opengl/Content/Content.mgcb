@@ -25,6 +25,18 @@
 /processorParam:TextureFormat=Color
 /build:merchant_idle.png
 
+#begin merchant_walk.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:merchant_walk.png
+
 #begin Roboto.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

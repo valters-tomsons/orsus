@@ -6,8 +6,9 @@ using MonoGame.Extended.Animations.SpriteSheets;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.TextureAtlases;
 using orsus_opengl.Entities;
-using orsus_opengl.Interfaces;
 using orsus_opengl.Models;
+using orsus_opengl.Enums;
+using orsus_opengl.Interfaces;
 
 namespace orsus_opengl
 {
@@ -16,8 +17,8 @@ namespace orsus_opengl
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private AnimatedSprite _merchantIdle;
         private SpriteFont _spriteFont;
+        private IEntity _merchant;
 
         private double _frameRate = 0;
 
@@ -38,23 +39,21 @@ namespace orsus_opengl
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            var merchantTexture = Content.Load<Texture2D>("merchant_idle");
-            var merchantSprites = new SpriteSheet(merchantTexture, 4, 64);
-
             _spriteFont = Content.Load<SpriteFont>("Roboto");
 
-            var regions = new TextureRegion2D[merchantSprites.SpriteSections.Length];
+            var merchant_IdleTexture = Content.Load<Texture2D>("merchant_idle");
+            var merchant_IdleSheet = new SpriteSheet(merchant_IdleTexture, 4, 64);
 
-            for(var i = 0; i < regions.Length; i++)
-            {
-                regions[i] = new TextureRegion2D(merchantTexture, merchantSprites.SpriteSections[i]);
-            }
+            var merchant_walkTexture = Content.Load<Texture2D>("merchant_walk");
+            var merchant_walkSheet = new SpriteSheet(merchant_walkTexture, 5, 64);
 
-            var animFac = new SpriteSheetAnimationFactory(regions);
+            var merchantEntity = new MerchantEntity();
+            merchantEntity.AddAnimationFrames(AnimationType.Idle, merchant_IdleSheet, 0.25f);
+            merchantEntity.AddAnimationFrames(AnimationType.Walk, merchant_walkSheet, 0.09f);
 
-            animFac.Add("idle", new SpriteSheetAnimationData(new[] {0, 1, 2, 3}, isLooping: true));
-            _merchantIdle = new AnimatedSprite(animFac, "idle");
+            merchantEntity.SetAnimationType(AnimationType.Idle);
+
+            _merchant = merchantEntity;
         }
 
         protected override void Update(GameTime gameTime)
@@ -62,8 +61,16 @@ namespace orsus_opengl
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            if(Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                _merchant.SetAnimationType(AnimationType.Walk);
+            }
+            else{
+                _merchant.SetAnimationType(AnimationType.Idle);
+            }
+
             _frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
-            _merchantIdle.Update(gameTime);
+            _merchant.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -72,14 +79,14 @@ namespace orsus_opengl
         {
             GraphicsDevice.Clear(Color.Black);
 
-            var x = (GraphicsDevice.Viewport.Width / 2 ) - _merchantIdle.TextureRegion.Width;
-            var y = (GraphicsDevice.Viewport.Height / 2 ) - _merchantIdle.TextureRegion.Height;
+            var x = (GraphicsDevice.Viewport.Width / 2 ) - _merchant.CurrentAnimation.TextureRegion.Width;
+            var y = (GraphicsDevice.Viewport.Height / 2 ) - _merchant.CurrentAnimation.TextureRegion.Height;
 
             _spriteBatch.Begin(default, default, SamplerState.PointClamp, default, default, default, default);
 
-            _merchantIdle.Draw(_spriteBatch, new Vector2(x, y), 0f, new Vector2(18));
+            _merchant.Draw(_spriteBatch, new Vector2(x, y));
 
-            _spriteBatch.DrawString(_spriteFont, _frameRate.ToString(), new Vector2(20), Color.White);
+            _spriteBatch.DrawString(_spriteFont, $"Framerate: {_frameRate}", new Vector2(20), Color.White);
 
             _spriteBatch.End();
 
