@@ -18,6 +18,8 @@ namespace orsus_opengl.Entities
 
         private readonly Dictionary<AnimationType, AnimatedSprite> _animations = new Dictionary<AnimationType, AnimatedSprite>();
 
+        private Vector2 _location;
+
         public MerchantEntity()
         {
 
@@ -35,7 +37,12 @@ namespace orsus_opengl.Entities
             var animFac = new SpriteSheetAnimationFactory(regions);
 
             animFac.Add(type.ToString(), new SpriteSheetAnimationData(Enumerable.Range(0, regions.Length).ToArray(), frameDuration: frameDuration, isLooping: true));
-            var animation = new AnimatedSprite(animFac, type.ToString());
+
+            var animation = new AnimatedSprite(animFac, type.ToString())
+            {
+                Origin = new Vector2(32, 32)
+            };
+
             _animations.Add(type, animation);
         }
 
@@ -48,12 +55,16 @@ namespace orsus_opengl.Entities
         {
             CurrentAnimation = _animations[AnimationType.Walk];
             SetEffect(SpriteEffects.FlipHorizontally);
+
+            _location.X -= 5;
         }
 
         public void WalkRight()
         {
             CurrentAnimation = _animations[AnimationType.Walk];
             SetEffect(SpriteEffects.None);
+
+            _location.X += 5;
         }
 
         public void SetAnimationType(AnimationType type)
@@ -72,15 +83,17 @@ namespace orsus_opengl.Entities
 
         public void Update(GameTime gameTime)
         {
-            foreach(var animation in _animations.Values)
-            {
-                animation.Update(gameTime);
-            }
+            CurrentAnimation.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            CurrentAnimation.Draw(spriteBatch, position, 0f, new Vector2(15));
+            if (_location == default)
+            {
+                _location = position;
+            }
+
+            CurrentAnimation.Draw(spriteBatch, _location, 0f, new Vector2(15));
         }
     }
 }
