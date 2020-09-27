@@ -51,20 +51,20 @@ namespace orsus_opengl.Entities
             CurrentAnimation = _animations[AnimationType.Idle];
         }
 
-        public void WalkLeft()
+        public void WalkLeft(GameTime time)
         {
             CurrentAnimation = _animations[AnimationType.Walk];
             SetEffect(SpriteEffects.FlipHorizontally);
 
-            _location.X -= 5;
+            _location.X -= 1 * time.ElapsedGameTime.Milliseconds;
         }
 
-        public void WalkRight()
+        public void WalkRight(GameTime time)
         {
             CurrentAnimation = _animations[AnimationType.Walk];
             SetEffect(SpriteEffects.None);
 
-            _location.X += 5;
+            _location.X += 1 * time.ElapsedGameTime.Milliseconds;
         }
 
         public void SetAnimationType(AnimationType type)

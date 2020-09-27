@@ -14,6 +14,7 @@ namespace orsus_opengl
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        private ISpriteSheet _background;
         private SpriteFont _spriteFont;
         private IEntity _merchant;
 
@@ -28,14 +29,17 @@ namespace orsus_opengl
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            IsFixedTimeStep = false;
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            var backgroundTexture = Content.Load<Texture2D>("background");
+            _background = new SingleSpriteSheet(backgroundTexture);
+
             _spriteFont = Content.Load<SpriteFont>("Roboto");
 
             var merchant_IdleTexture = Content.Load<Texture2D>("merchant_idle");
@@ -60,11 +64,11 @@ namespace orsus_opengl
 
             if(Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                _merchant.WalkRight();
+                _merchant.WalkRight(gameTime);
             }
             else if(Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                _merchant.WalkLeft();
+                _merchant.WalkLeft(gameTime);
             }
             else{
                 _merchant.Idle();
@@ -77,7 +81,7 @@ namespace orsus_opengl
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.Gray);
 
             var x = (GraphicsDevice.Viewport.Width / 2 ) - _merchant.CurrentAnimation.TextureRegion.Width;
             var y = (GraphicsDevice.Viewport.Height / 2 ) - _merchant.CurrentAnimation.TextureRegion.Height;
@@ -86,7 +90,10 @@ namespace orsus_opengl
 
             using(new BatchDrawing(_spriteBatch))
             {
+                _spriteBatch.Draw(_background.SheetTexture, new Vector2(0,0), _background.SpriteSections[0], Color.White, 0f, default, new Vector2(10), SpriteEffects.None, default);
+
                 _merchant.Draw(_spriteBatch, new Vector2(x, y));
+
                 _spriteBatch.DrawString(_spriteFont, $"Framerate: {_frameRate}", new Vector2(20), Color.White);
             }
 

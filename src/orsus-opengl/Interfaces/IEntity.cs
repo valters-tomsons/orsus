@@ -13,8 +13,8 @@ namespace orsus_opengl.Interfaces
         void SetAnimationType(AnimationType type);
         void Update(GameTime gameTime);
         void Draw(SpriteBatch spriteBatch, Vector2 position);
-        void WalkLeft();
-        void WalkRight();
+        void WalkLeft(GameTime time);
+        void WalkRight(GameTime time);
         void Idle();
     }
 }
