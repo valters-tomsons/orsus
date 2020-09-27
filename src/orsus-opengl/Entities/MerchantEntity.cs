@@ -25,7 +25,7 @@ namespace orsus_opengl.Entities
 
         }
 
-        public void AddAnimationFrames(AnimationType type, SpriteSheet spriteSheet, float frameDuration = 0.2f)
+        public void AddAnimationFrames(AnimationType type, ISpriteSheet spriteSheet, float frameDuration = 0.2f)
         {
             var regions = new TextureRegion2D[spriteSheet.SpriteSections.Length];
 

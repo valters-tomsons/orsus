@@ -39,10 +39,10 @@ namespace orsus_opengl
             _spriteFont = Content.Load<SpriteFont>("Roboto");
 
             var merchant_IdleTexture = Content.Load<Texture2D>("merchant_idle");
-            var merchant_IdleSheet = new SpriteSheet(merchant_IdleTexture, 4, 64);
+            var merchant_IdleSheet = new LinearSpriteSheet(merchant_IdleTexture, 4, 64);
 
             var merchant_walkTexture = Content.Load<Texture2D>("merchant_walk");
-            var merchant_walkSheet = new SpriteSheet(merchant_walkTexture, 5, 64);
+            var merchant_walkSheet = new LinearSpriteSheet(merchant_walkTexture, 5, 64);
 
             var merchantEntity = new MerchantEntity();
             merchantEntity.AddAnimationFrames(AnimationType.Idle, merchant_IdleSheet, 0.25f);
