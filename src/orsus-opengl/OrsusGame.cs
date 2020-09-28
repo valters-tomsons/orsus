@@ -6,6 +6,7 @@ using orsus_opengl.Models;
 using orsus_opengl.Enums;
 using orsus_opengl.Interfaces;
 using orsus_opengl.Abstractions;
+using orsus_opengl.Bases;
 
 namespace orsus_opengl
 {
@@ -17,6 +18,7 @@ namespace orsus_opengl
         private ISpriteSheet _background;
         private SpriteFont _spriteFont;
 
+        private IScene _scene;
         private IEntity _player;
 
         private double _frameRate = 0;
@@ -24,6 +26,8 @@ namespace orsus_opengl
         public OrsusGame()
         {
             _graphics = new GraphicsDeviceManager(this);
+            _scene = new SceneBase();
+
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -37,9 +41,7 @@ namespace orsus_opengl
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            var backgroundTexture = Content.Load<Texture2D>("background");
-            _background = new SingleSpriteSheet(backgroundTexture);
+            _scene.LoadContent(this, _spriteBatch);
 
             _spriteFont = Content.Load<SpriteFont>("Roboto");
 
@@ -88,7 +90,7 @@ namespace orsus_opengl
 
             using(new BatchDrawing(_spriteBatch))
             {
-                _spriteBatch.Draw(_background.SheetTexture, new Vector2(0,0), _background.SpriteSections[0], Color.White, 0f, default, new Vector2(10), SpriteEffects.None, default);
+                _scene.DrawBackground(gameTime);
 
                 _player.Draw(_spriteBatch, new Vector2(x, y));
 
