@@ -1,6 +1,6 @@
 namespace orsus_opengl.Entities
 {
-    public class MerchantEntity : Entity
+    public class MerchantEntity : EntityBase
     {
         public MerchantEntity()
         {

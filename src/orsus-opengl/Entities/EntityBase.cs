@@ -11,7 +11,7 @@ using orsus_opengl.Interfaces;
 
 namespace orsus_opengl.Entities
 {
-    public class Entity : IEntity
+    public class EntityBase : IEntity
     {
         public AnimatedSprite CurrentAnimation { get; private set; }
 

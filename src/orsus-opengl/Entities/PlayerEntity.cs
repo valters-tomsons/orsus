@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 
 namespace orsus_opengl.Entities
 {
-    public class PlayerEntity : Entity
+    public class PlayerEntity : EntityBase
     {
         public PlayerEntity()
         {
