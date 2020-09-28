@@ -15,10 +15,9 @@ namespace orsus_opengl
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private ISpriteSheet _background;
         private SpriteFont _spriteFont;
 
-        private IScene _scene;
+        private readonly IScene _scene;
         private IEntity _player;
 
         private double _frameRate = 0;

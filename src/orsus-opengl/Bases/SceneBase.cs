@@ -7,27 +7,22 @@ namespace orsus_opengl.Bases
     public class SceneBase : IScene
     {
         private Texture2D Background { get; set; }
-        private SpriteBatch _spriteBatch {get; set;}
-
-        public SceneBase()
-        {
-
-        }
+        private SpriteBatch SpriteBatch {get; set;}
 
         public void Initialize(SpriteBatch spriteBatch)
         {
-            _spriteBatch = spriteBatch;
+            SpriteBatch = spriteBatch;
         }
 
         public void LoadContent(Game game, SpriteBatch spriteBatch)
         {
-            _spriteBatch = spriteBatch;
+            SpriteBatch = spriteBatch;
             Background = game.Content.Load<Texture2D>("background");
         }
 
         public void DrawBackground(GameTime gameTime)
         {
-            _spriteBatch.Draw(Background, new Vector2(0,0), null, Color.White, 0f, default, new Vector2(10), SpriteEffects.None, default);
+            SpriteBatch.Draw(Background, new Vector2(0,0), null, Color.White, 0f, default, new Vector2(10), SpriteEffects.None, default);
         }
     }
 }
