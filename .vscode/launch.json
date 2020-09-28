@@ -2,17 +2,6 @@
    "version": "0.2.0",
    "configurations": [
         {
-            "name": "Launch Orsus (Vulkan)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/orsus-vulkan/bin/Debug/netcoreapp3.1/orsus-vulkan.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/src/orsus-vulkan",
-            "console": "internalConsole",
-            "stopAtEntry": false
-        },
-        {
             "name": "Launch Orsus (OpenGL)",
             "type": "coreclr",
             "request": "launch",
@@ -20,6 +9,17 @@
             "program": "${workspaceFolder}/src/orsus-opengl/bin/Debug/netcoreapp3.1/linux-x64/orsus-opengl.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/orsus-opengl",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Orsus (Vulkan)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/orsus-vulkan/bin/Debug/netcoreapp3.1/orsus-vulkan.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/orsus-vulkan",
             "console": "internalConsole",
             "stopAtEntry": false
         },

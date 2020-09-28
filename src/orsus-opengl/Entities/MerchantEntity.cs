@@ -1,3 +1,5 @@
+using orsus_opengl.Bases;
+
 namespace orsus_opengl.Entities
 {
     public class MerchantEntity : EntityBase

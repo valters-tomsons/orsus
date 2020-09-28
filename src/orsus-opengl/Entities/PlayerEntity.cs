@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using orsus_opengl.Bases;
 
 namespace orsus_opengl.Entities
 {

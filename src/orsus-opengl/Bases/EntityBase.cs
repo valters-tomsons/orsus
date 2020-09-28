@@ -9,7 +9,7 @@ using MonoGame.Extended.TextureAtlases;
 using orsus_opengl.Enums;
 using orsus_opengl.Interfaces;
 
-namespace orsus_opengl.Entities
+namespace orsus_opengl.Bases
 {
     public class EntityBase : IEntity
     {
