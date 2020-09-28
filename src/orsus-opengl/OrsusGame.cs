@@ -42,6 +42,11 @@ namespace orsus_opengl
 
             _spriteFont = Content.Load<SpriteFont>("Roboto");
 
+            var player_idleTextrue = Content.Load<Texture2D>("player_idle");
+            var player_idleSheet = new LinearSpriteSheet(player_idleTextrue, sections: 11, spriteSize: 180);
+
+            // var playerEntity = new 
+
             var merchant_IdleTexture = Content.Load<Texture2D>("merchant_idle");
             var merchant_IdleSheet = new LinearSpriteSheet(merchant_IdleTexture, 4, 64);
 
@@ -83,8 +88,8 @@ namespace orsus_opengl
         {
             GraphicsDevice.Clear(Color.Gray);
 
-            var x = (GraphicsDevice.Viewport.Width / 2 ) - _merchant.CurrentAnimation.TextureRegion.Width;
-            var y = (GraphicsDevice.Viewport.Height / 2 ) - _merchant.CurrentAnimation.TextureRegion.Height;
+            var x = GraphicsDevice.Viewport.Width / 2 ;
+            var y = GraphicsDevice.Viewport.Height / 2;
 
             _frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
 

@@ -8,6 +8,7 @@ namespace orsus_opengl.Interfaces
     public interface IEntity
     {
         AnimatedSprite CurrentAnimation { get; }
+        float Speed { get; }
 
         void AddAnimationFrames(AnimationType type, ISpriteSheet spriteSheet, float frameDuration = 0.2f);
         void SetAnimationType(AnimationType type);
