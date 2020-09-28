@@ -20,6 +20,9 @@ namespace orsus_opengl.Entities
         public Vector2 Location;
 
         public float Speed { get; set; }
+        public Vector2 Scale { get; set; } = new Vector2(1);
+
+        private bool Rotate;
 
         public void AddAnimationFrames(AnimationType type, ISpriteSheet spriteSheet, float frameDuration = 0.2F)
         {
@@ -46,12 +49,12 @@ namespace orsus_opengl.Entities
                 Location = position;
             }
 
-            CurrentAnimation.Draw(spriteBatch, Location, 0f, new Vector2(15));
+            CurrentAnimation.Draw(spriteBatch, Location, 0f, Scale);
         }
 
         public void Idle()
         {
-            CurrentAnimation = _animations[AnimationType.Idle];
+            SetAnimationType(AnimationType.Idle);
         }
 
         public void SetAnimationType(AnimationType type)
@@ -60,31 +63,32 @@ namespace orsus_opengl.Entities
             CurrentAnimation = _animations[type];
         }
 
-        private void SetEffect(SpriteEffects effect)
-        {
-            foreach(var animation in _animations.Values)
-            {
-                animation.Effect = effect;
-            }
-        }
-
         public void Update(GameTime gameTime)
         {
+            if(Rotate)
+            {
+                CurrentAnimation.Effect = SpriteEffects.FlipHorizontally;
+            }
+            else
+            {
+                CurrentAnimation.Effect = SpriteEffects.None;
+            }
+
             CurrentAnimation.Update(gameTime);
         }
 
         public void WalkLeft(GameTime time)
         {
-            CurrentAnimation = _animations[AnimationType.Walk];
-            SetEffect(SpriteEffects.FlipHorizontally);
+            SetAnimationType(AnimationType.Walk);
+            Rotate = true;
 
             Location.X -= Speed * time.ElapsedGameTime.Milliseconds;
         }
 
         public void WalkRight(GameTime time)
         {
-            CurrentAnimation = _animations[AnimationType.Walk];
-            SetEffect(SpriteEffects.None);
+            SetAnimationType(AnimationType.Walk);
+            Rotate = false;
 
             Location.X += Speed * time.ElapsedGameTime.Milliseconds;
         }

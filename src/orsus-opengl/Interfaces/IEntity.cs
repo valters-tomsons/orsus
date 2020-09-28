@@ -9,6 +9,7 @@ namespace orsus_opengl.Interfaces
     {
         AnimatedSprite CurrentAnimation { get; }
         float Speed { get; }
+        Vector2 Scale { get; set; }
 
         void AddAnimationFrames(AnimationType type, ISpriteSheet spriteSheet, float frameDuration = 0.2f);
         void SetAnimationType(AnimationType type);

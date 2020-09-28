@@ -16,7 +16,8 @@ namespace orsus_opengl
 
         private ISpriteSheet _background;
         private SpriteFont _spriteFont;
-        private IEntity _merchant;
+
+        private IEntity _player;
 
         private double _frameRate = 0;
 
@@ -42,24 +43,16 @@ namespace orsus_opengl
 
             _spriteFont = Content.Load<SpriteFont>("Roboto");
 
-            var player_idleTextrue = Content.Load<Texture2D>("player_idle");
-            var player_idleSheet = new LinearSpriteSheet(player_idleTextrue, sections: 11, spriteSize: 180);
+            var player_idleTexture = Content.Load<Texture2D>("player_idle");
+            var player_idleSheet = new LinearSpriteSheet(player_idleTexture, sections: 11, spriteSize: 180);
+            var player_walkTexture = Content.Load<Texture2D>("player_walk");
+            var player_walkSheet = new LinearSpriteSheet(player_walkTexture, sections: 8, spriteSize: 180);
 
-            // var playerEntity = new 
+            var playerEntity = new PlayerEntity();
+            playerEntity.AddAnimationFrames(AnimationType.Idle, player_idleSheet, frameDuration: 0.1f);
+            playerEntity.AddAnimationFrames(AnimationType.Walk, player_walkSheet, frameDuration: 0.1f);
 
-            var merchant_IdleTexture = Content.Load<Texture2D>("merchant_idle");
-            var merchant_IdleSheet = new LinearSpriteSheet(merchant_IdleTexture, 4, 64);
-
-            var merchant_walkTexture = Content.Load<Texture2D>("merchant_walk");
-            var merchant_walkSheet = new LinearSpriteSheet(merchant_walkTexture, 5, 64);
-
-            var merchantEntity = new MerchantEntity();
-            merchantEntity.AddAnimationFrames(AnimationType.Idle, merchant_IdleSheet, 0.25f);
-            merchantEntity.AddAnimationFrames(AnimationType.Walk, merchant_walkSheet, 0.09f);
-
-            merchantEntity.SetAnimationType(AnimationType.Idle);
-
-            _merchant = merchantEntity;
+            _player = playerEntity;
         }
 
         protected override void Update(GameTime gameTime)
@@ -69,17 +62,17 @@ namespace orsus_opengl
 
             if(Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                _merchant.WalkRight(gameTime);
+                _player.WalkRight(gameTime);
             }
             else if(Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                _merchant.WalkLeft(gameTime);
+                _player.WalkLeft(gameTime);
             }
             else{
-                _merchant.Idle();
+                _player.Idle();
             }
 
-            _merchant.Update(gameTime);
+            _player.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -97,7 +90,7 @@ namespace orsus_opengl
             {
                 _spriteBatch.Draw(_background.SheetTexture, new Vector2(0,0), _background.SpriteSections[0], Color.White, 0f, default, new Vector2(10), SpriteEffects.None, default);
 
-                _merchant.Draw(_spriteBatch, new Vector2(x, y));
+                _player.Draw(_spriteBatch, new Vector2(x, y));
 
                 _spriteBatch.DrawString(_spriteFont, $"Framerate: {_frameRate}", new Vector2(20), Color.White);
             }

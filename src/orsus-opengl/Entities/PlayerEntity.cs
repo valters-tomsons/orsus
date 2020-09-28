@@ -1,3 +1,5 @@
+using Microsoft.Xna.Framework;
+
 namespace orsus_opengl.Entities
 {
     public class PlayerEntity : Entity
@@ -5,6 +7,7 @@ namespace orsus_opengl.Entities
         public PlayerEntity()
         {
             Speed = 1f;
+            Scale = new Vector2(5);
         }
     }
 }
