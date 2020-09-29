@@ -40,7 +40,7 @@ namespace orsus_opengl
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _scene.LoadContent(this, _spriteBatch);
+            _scene.LoadContent(Content, _spriteBatch);
 
             _spriteFont = Content.Load<SpriteFont>("Roboto");
 

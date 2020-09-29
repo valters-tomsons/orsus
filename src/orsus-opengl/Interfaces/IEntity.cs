@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Animations;
 using orsus_opengl.Enums;
@@ -18,5 +19,6 @@ namespace orsus_opengl.Interfaces
         void WalkLeft(GameTime time);
         void WalkRight(GameTime time);
         void Idle();
+        void LoadContent(ContentManager content);
     }
 }

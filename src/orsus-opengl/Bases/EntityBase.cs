@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Animations;
 using MonoGame.Extended.Animations.SpriteSheets;
@@ -23,6 +24,11 @@ namespace orsus_opengl.Bases
         public Vector2 Scale { get; set; } = new Vector2(1);
 
         private bool Rotate;
+
+        public void LoadContent(ContentManager content)
+        {
+            
+        }
 
         public void AddAnimationFrames(AnimationType type, ISpriteSheet spriteSheet, float frameDuration = 0.2F)
         {

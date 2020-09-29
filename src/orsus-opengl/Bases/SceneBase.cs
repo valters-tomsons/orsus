@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using orsus_opengl.Interfaces;
 
@@ -14,10 +15,10 @@ namespace orsus_opengl.Bases
             SpriteBatch = spriteBatch;
         }
 
-        public void LoadContent(Game game, SpriteBatch spriteBatch)
+        public void LoadContent(ContentManager game, SpriteBatch spriteBatch)
         {
             SpriteBatch = spriteBatch;
-            Background = game.Content.Load<Texture2D>("background");
+            Background = game.Load<Texture2D>("background");
         }
 
         public void DrawBackground(GameTime gameTime)
