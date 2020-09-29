@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
@@ -25,10 +26,7 @@ namespace orsus_opengl.Bases
 
         private bool Rotate;
 
-        public void LoadContent(ContentManager content)
-        {
-            
-        }
+        public void LoadContent(ContentManager content) => throw new NotSupportedException();
 
         public void AddAnimationFrames(AnimationType type, ISpriteSheet spriteSheet, float frameDuration = 0.2F)
         {

@@ -18,14 +18,16 @@ namespace orsus_opengl
         private SpriteFont _spriteFont;
 
         private readonly IScene _scene;
-        private IEntity _player;
+        private readonly IEntity _player;
 
         private double _frameRate = 0;
 
         public OrsusGame()
         {
             _graphics = new GraphicsDeviceManager(this);
+
             _scene = new SceneBase();
+            _player = new PlayerEntity();
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -40,20 +42,10 @@ namespace orsus_opengl
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _scene.LoadContent(Content, _spriteBatch);
-
             _spriteFont = Content.Load<SpriteFont>("Roboto");
 
-            var player_idleTexture = Content.Load<Texture2D>("player_idle");
-            var player_idleSheet = new LinearSpriteSheet(player_idleTexture, sections: 11, spriteSize: 180);
-            var player_walkTexture = Content.Load<Texture2D>("player_walk");
-            var player_walkSheet = new LinearSpriteSheet(player_walkTexture, sections: 8, spriteSize: 180);
-
-            var playerEntity = new PlayerEntity();
-            playerEntity.AddAnimationFrames(AnimationType.Idle, player_idleSheet, frameDuration: 0.1f);
-            playerEntity.AddAnimationFrames(AnimationType.Walk, player_walkSheet, frameDuration: 0.1f);
-
-            _player = playerEntity;
+            _scene.LoadContent(Content, _spriteBatch);
+            _player.LoadContent(Content);
         }
 
         protected override void Update(GameTime gameTime)
