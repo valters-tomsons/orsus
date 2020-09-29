@@ -61,6 +61,10 @@ namespace orsus_opengl
             {
                 _player.WalkLeft(gameTime);
             }
+            else if(Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                _player.Attack(gameTime);
+            }
             else{
                 _player.Idle();
             }

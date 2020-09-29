@@ -18,14 +18,17 @@ namespace orsus_opengl.Entities
 
         void IEntity.LoadContent(ContentManager content)
         {
-            var player_idleTexture = content.Load<Texture2D>("player_idle");
-            var player_walkTexture = content.Load<Texture2D>("player_walk");
+            var player_idle = content.Load<Texture2D>("player_idle");
+            var player_walk = content.Load<Texture2D>("player_walk");
+            var player_attack = content.Load<Texture2D>("player_attack2");
 
-            var player_idleSheet = new LinearSpriteSheet(player_idleTexture, sections: 11, spriteSize: 180);
-            var player_walkSheet = new LinearSpriteSheet(player_walkTexture, sections: 8, spriteSize: 180);
+            var player_idleSheet = new LinearSpriteSheet(player_idle, sections: 11, spriteSize: 180);
+            var player_walkSheet = new LinearSpriteSheet(player_walk, sections: 8, spriteSize: 180);
+            var player_atkSheet = new LinearSpriteSheet(player_attack, sections: 7, spriteSize: 180);
 
             AddAnimationFrames(AnimationType.Idle, player_idleSheet, frameDuration: 0.1f);
             AddAnimationFrames(AnimationType.Walk, player_walkSheet, frameDuration: 0.1f);
+            AddAnimationFrames(AnimationType.Attack1, player_atkSheet, frameDuration: 0.1f, loop: false);
         }
     }
 }

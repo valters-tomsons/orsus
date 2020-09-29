@@ -25,10 +25,11 @@ namespace orsus_opengl.Bases
         public Vector2 Scale { get; set; } = new Vector2(1);
 
         private bool Rotate;
+        private bool Attacking;
 
         public void LoadContent(ContentManager content) => throw new NotSupportedException();
 
-        public void AddAnimationFrames(AnimationType type, ISpriteSheet spriteSheet, float frameDuration = 0.2F)
+        public void AddAnimationFrames(AnimationType type, ISpriteSheet spriteSheet, float frameDuration = 0.2F, bool loop = true)
         {
             var regions = new TextureRegion2D[spriteSheet.SpriteSections.Length];
 
@@ -39,9 +40,9 @@ namespace orsus_opengl.Bases
 
             var animFac = new SpriteSheetAnimationFactory(regions);
 
-            animFac.Add(type.ToString(), new SpriteSheetAnimationData(Enumerable.Range(0, regions.Length).ToArray(), frameDuration: frameDuration, isLooping: true));
+            animFac.Add(type.ToString(), new SpriteSheetAnimationData(Enumerable.Range(0, regions.Length).ToArray(), frameDuration: frameDuration, isLooping: loop));
 
-            var animation = new AnimatedSprite(animFac, type.ToString());
+            var animation = new AnimatedSprite(animFac);
 
             _animations.Add(type, animation);
         }
@@ -64,7 +65,11 @@ namespace orsus_opengl.Bases
         public void SetAnimationType(AnimationType type)
         {
             if(_animations[type] != CurrentAnimation)
-            CurrentAnimation = _animations[type];
+            {
+                Console.WriteLine($"{DateTime.Now.Ticks} - setting animation {type}");
+                CurrentAnimation = _animations[type];
+                CurrentAnimation.Play(type.ToString());
+            }
         }
 
         public void Update(GameTime gameTime)
@@ -78,7 +83,19 @@ namespace orsus_opengl.Bases
                 CurrentAnimation.Effect = SpriteEffects.None;
             }
 
-            CurrentAnimation.Update(gameTime);
+            if (Attacking && _animations[AnimationType.Attack1] != CurrentAnimation)
+            {
+                SetAnimationType(AnimationType.Attack1);
+                CurrentAnimation.Play(nameof(AnimationType.Attack1));
+                Attacking = false;
+            }
+
+            foreach(var anim in _animations.Values)
+            {
+                anim.Update(gameTime);
+            }
+
+            // CurrentAnimation.Update(gameTime);
         }
 
         public void WalkLeft(GameTime time)
@@ -95,6 +112,14 @@ namespace orsus_opengl.Bases
             Rotate = false;
 
             Location.X += Speed * time.ElapsedGameTime.Milliseconds;
+        }
+
+        public void Attack(GameTime time)
+        {
+            if(!Attacking)
+            {
+                Attacking = true;
+            }
         }
     }
 }
