@@ -79,12 +79,10 @@ namespace orsus_opengl
 
             _frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
 
-            using(new BatchDrawing(_spriteBatch))
+            using(new BatchDrawing(_spriteBatch, SamplerState.PointClamp))
             {
                 _scene.DrawBackground(gameTime);
-
                 _player.Draw(_spriteBatch, new Vector2(x, y));
-
                 _spriteBatch.DrawString(_spriteFont, $"Framerate: {_frameRate}", new Vector2(20), Color.White);
             }
 

@@ -7,10 +7,10 @@ namespace orsus_opengl.Abstractions
     {
         private readonly SpriteBatch _spriteBatch;
 
-        public BatchDrawing(SpriteBatch spriteBatch)
+        public BatchDrawing(SpriteBatch spriteBatch, SamplerState state)
         {
             _spriteBatch = spriteBatch;
-            _spriteBatch.Begin(default, default, SamplerState.PointClamp, default, default, default, default);
+            _spriteBatch.Begin(default, default, state, default, default, default, default);
         }
 
         public void Dispose()
