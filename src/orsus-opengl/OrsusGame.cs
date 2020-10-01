@@ -2,10 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using orsus_opengl.Entities;
-using orsus_opengl.Models;
-using orsus_opengl.Enums;
 using orsus_opengl.Interfaces;
-using orsus_opengl.Abstractions;
 using orsus_opengl.Bases;
 
 namespace orsus_opengl
@@ -83,12 +80,13 @@ namespace orsus_opengl
 
             _frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
 
-            using(new BatchDrawing(_spriteBatch, SamplerState.PointClamp))
-            {
-                _scene.DrawBackground(gameTime);
-                _player.Draw(_spriteBatch, new Vector2(x, y));
-                _spriteBatch.DrawString(_spriteFont, $"Framerate: {_frameRate}", new Vector2(20), Color.White);
-            }
+            _spriteBatch.Begin(default, default, SamplerState.PointClamp, default, default, default, default);
+
+            _scene.DrawBackground(gameTime);
+            _player.Draw(_spriteBatch, new Vector2(x, y));
+            _spriteBatch.DrawString(_spriteFont, $"Framerate: {_frameRate}", new Vector2(20), Color.White);
+
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
