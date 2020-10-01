@@ -1,4 +1,6 @@
 using Microsoft.Xna.Framework;
+using MonoGame.Extended.TextureAtlases;
+using orsus_opengl.Interfaces;
 
 namespace orsus_opengl.Helpers
 {
@@ -15,6 +17,18 @@ namespace orsus_opengl.Helpers
             }
 
             return sprites;
+        }
+
+        public static TextureRegion2D[] SpriteSheetToTextureRegions(ISpriteSheet spriteSheet)
+        {
+            var regions = new TextureRegion2D[spriteSheet.SpriteSections.Length];
+
+            for(var i = 0; i < regions.Length; i++)
+            {
+                regions[i] = new TextureRegion2D(spriteSheet.SheetTexture, spriteSheet.SpriteSections[i]);
+            }
+
+            return regions;
         }
     }
 }

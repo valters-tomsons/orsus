@@ -9,6 +9,7 @@ using MonoGame.Extended.Animations.SpriteSheets;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.TextureAtlases;
 using orsus_opengl.Enums;
+using orsus_opengl.Helpers;
 using orsus_opengl.Interfaces;
 
 namespace orsus_opengl.Bases
@@ -31,12 +32,7 @@ namespace orsus_opengl.Bases
 
         public void AddAnimationFrames(AnimationType type, ISpriteSheet spriteSheet, float frameDuration = 0.2F, bool loop = true)
         {
-            var regions = new TextureRegion2D[spriteSheet.SpriteSections.Length];
-
-            for(var i = 0; i < regions.Length; i++)
-            {
-                regions[i] = new TextureRegion2D(spriteSheet.SheetTexture, spriteSheet.SpriteSections[i]);
-            }
+            var regions = SpriteSheetHelper.SpriteSheetToTextureRegions(spriteSheet);
 
             var animFac = new SpriteSheetAnimationFactory(regions);
 
@@ -66,7 +62,6 @@ namespace orsus_opengl.Bases
         {
             if(_animations[type] != CurrentAnimation)
             {
-                Console.WriteLine($"{DateTime.Now.Ticks} - setting animation {type}");
                 CurrentAnimation = _animations[type];
                 CurrentAnimation.Play(type.ToString());
             }
@@ -90,12 +85,7 @@ namespace orsus_opengl.Bases
                 Attacking = false;
             }
 
-            foreach(var anim in _animations.Values)
-            {
-                anim.Update(gameTime);
-            }
-
-            // CurrentAnimation.Update(gameTime);
+            CurrentAnimation.Update(gameTime);
         }
 
         public void WalkLeft(GameTime time)
