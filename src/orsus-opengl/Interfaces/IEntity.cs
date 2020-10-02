@@ -12,7 +12,6 @@ namespace orsus_opengl.Interfaces
         float Speed { get; }
         Vector2 Scale { get; set; }
 
-    
         void AddAnimationFrames(AnimationType type, ISpriteSheet spriteSheet, float frameDuration = 0.2F, bool loop = true);
         void SetAnimationType(AnimationType type);
         void Update(GameTime gameTime);

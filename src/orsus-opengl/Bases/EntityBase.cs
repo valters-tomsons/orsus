@@ -25,6 +25,8 @@ namespace orsus_opengl.Bases
         public float Speed { get; set; }
         public Vector2 Scale { get; set; } = new Vector2(1);
 
+        public AnimatedSprite sprite;
+
         private bool Rotate;
         private bool Attacking;
 
@@ -50,58 +52,67 @@ namespace orsus_opengl.Bases
                 Location = position;
             }
 
-            CurrentAnimation.Draw(spriteBatch, Location, 0f, Scale);
+            // CurrentAnimation.Draw(spriteBatch, Location, 0f, Scale);
+            sprite.Draw(spriteBatch, Location, 0f, Scale);
         }
 
         public void Idle()
         {
-            SetAnimationType(AnimationType.Idle);
+            if(!Attacking)
+            {
+                sprite.Play("player_idle");
+            }
         }
 
         public void SetAnimationType(AnimationType type)
         {
-            if(_animations[type] != CurrentAnimation)
-            {
-                CurrentAnimation = _animations[type];
-                CurrentAnimation.Play(type.ToString());
-            }
+            // if(_animations[type] != CurrentAnimation)
+            // {
+            //     CurrentAnimation = _animations[type];
+            //     CurrentAnimation.Play(type.ToString());
+            // }
         }
 
         public void Update(GameTime gameTime)
         {
             if(Rotate)
             {
-                CurrentAnimation.Effect = SpriteEffects.FlipHorizontally;
+                sprite.Effect = SpriteEffects.FlipHorizontally;
             }
             else
             {
-                CurrentAnimation.Effect = SpriteEffects.None;
+                sprite.Effect = SpriteEffects.None;
             }
 
-            if (Attacking && _animations[AnimationType.Attack1] != CurrentAnimation)
+            if (Attacking)
             {
-                SetAnimationType(AnimationType.Attack1);
-                CurrentAnimation.Play(nameof(AnimationType.Attack1));
-                Attacking = false;
+                // SetAnimationType(AnimationType.Attack1);
+                // CurrentAnimation.Play(nameof(AnimationType.Attack1));
+                // Attacking = false;
             }
 
-            CurrentAnimation.Update(gameTime);
+            // CurrentAnimation.Update(gameTime);
+            sprite.Update(gameTime);
         }
 
         public void WalkLeft(GameTime time)
         {
-            SetAnimationType(AnimationType.Walk);
-            Rotate = true;
-
-            Location.X -= Speed * time.ElapsedGameTime.Milliseconds;
+            if(!Attacking)
+            {
+                sprite.Play("player_walk");
+                Rotate = true;
+                Location.X -= Speed * time.ElapsedGameTime.Milliseconds;
+            }
         }
 
         public void WalkRight(GameTime time)
         {
-            SetAnimationType(AnimationType.Walk);
-            Rotate = false;
-
-            Location.X += Speed * time.ElapsedGameTime.Milliseconds;
+            if(!Attacking)
+            {
+                sprite.Play("player_walk");
+                Rotate = false;
+                Location.X += Speed * time.ElapsedGameTime.Milliseconds;
+            }
         }
 
         public void Attack(GameTime time)
@@ -109,7 +120,13 @@ namespace orsus_opengl.Bases
             if(!Attacking)
             {
                 Attacking = true;
+                sprite.Play("player_attack", AttackEnd);
             }
+        }
+
+        private void AttackEnd()
+        {
+            Attacking = false;
         }
     }
 }
