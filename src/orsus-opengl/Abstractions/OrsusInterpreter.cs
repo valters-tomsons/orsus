@@ -23,8 +23,8 @@ namespace orsus_opengl.Abstractions
 
             _roslynInterpreter.AddAssembly(Assembly.GetEntryAssembly());
 
-            _commands.Add("info", DisplayInfo);
             _commands.Add("exit", Exit);
+            _commands.Add("list", ListCommands);
         }
 
         public void AddVariable(string name, object obj)
@@ -54,14 +54,17 @@ namespace orsus_opengl.Abstractions
             }
         }
 
-        public void DisplayInfo(IConsoleOutput output)
-        {
-            output.Append("OrsusGame 2020");
-        }
-
         public void Exit(IConsoleOutput output)
         {
             _game.Exit();
+        }
+
+        public void ListCommands(IConsoleOutput output)
+        {
+            foreach(var key in _commands.Keys)
+            {
+                output.Append(key);
+            }
         }
 
         private void RedirectToRoslyn(IConsoleOutput output, string command)
