@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using System;
 using QuakeConsole;
+using Microsoft.Xna.Framework;
 
 namespace orsus_opengl.Abstractions
 {
@@ -9,9 +10,12 @@ namespace orsus_opengl.Abstractions
     {
         private readonly RoslynInterpreter _roslynInterpreter;
         private readonly Dictionary<string, Action<IConsoleOutput>> _commands = new Dictionary<string, Action<IConsoleOutput>>();
+        private readonly Game _game;
 
-        public OrsusInterpreter()
+        public OrsusInterpreter(Game game)
         {
+            _game = game;
+
             _roslynInterpreter = new RoslynInterpreter()
             {
                 EchoEnabled = false
@@ -20,6 +24,7 @@ namespace orsus_opengl.Abstractions
             _roslynInterpreter.AddAssembly(Assembly.GetEntryAssembly());
 
             _commands.Add("info", DisplayInfo);
+            _commands.Add("exit", Exit);
         }
 
         public void AddVariable(string name, object obj)
@@ -52,6 +57,11 @@ namespace orsus_opengl.Abstractions
         public void DisplayInfo(IConsoleOutput output)
         {
             output.Append("OrsusGame 2020");
+        }
+
+        public void Exit(IConsoleOutput output)
+        {
+            _game.Exit();
         }
 
         private void RedirectToRoslyn(IConsoleOutput output, string command)

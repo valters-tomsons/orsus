@@ -6,11 +6,9 @@ namespace orsus_opengl.Abstractions
 {
     public class DropdownConsole : ConsoleComponent, IConsole
     {
-        private readonly OrsusInterpreter _interpreter = new OrsusInterpreter();
-
         public DropdownConsole(Game game) : base(game)
         {
-            Interpreter = _interpreter;
+            Interpreter = new OrsusInterpreter(game);
             game.Components.Add(this);
         }
 
