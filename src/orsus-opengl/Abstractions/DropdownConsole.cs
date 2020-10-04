@@ -6,10 +6,23 @@ namespace orsus_opengl.Abstractions
 {
     public class DropdownConsole : ConsoleComponent, IConsole
     {
+        private readonly OrsusInterpreter interpreter;
+
         public DropdownConsole(Game game) : base(game)
         {
-            Interpreter = new OrsusInterpreter(game);
+            interpreter = new OrsusInterpreter(game);
+            Interpreter = interpreter;
+
+            InputPrefix = "~> ";
+            InputPrefixColor = Color.Pink;
+            FontColor = Color.White;
+
             game.Components.Add(this);
+        }
+
+        public void TrackVariable(string name, object obj)
+        {
+            interpreter.AddVariable(name, obj);
         }
 
         public void ToggleConsole()

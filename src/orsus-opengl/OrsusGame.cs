@@ -36,6 +36,11 @@ namespace orsus_opengl
         protected override void Initialize()
         {
             _console.Initialize();
+
+            _console.TrackVariable("player", _player);
+            _console.TrackVariable("scene", _scene);
+            _console.TrackVariable("console", _console);
+
             IsFixedTimeStep = false;
             base.Initialize();
         }

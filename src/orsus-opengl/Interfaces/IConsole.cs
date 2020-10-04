@@ -7,5 +7,6 @@ namespace orsus_opengl.Interfaces
         void Initialize();
         void ToggleConsole();
         bool CanAcceptInput();
+        void TrackVariable(string name, object obj);
     }
 }
