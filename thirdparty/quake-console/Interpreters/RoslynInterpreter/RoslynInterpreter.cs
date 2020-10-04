@@ -26,7 +26,6 @@ namespace QuakeConsole
         private const int DefaultTypeLoaderRecursionLevel = 2;
 
         private readonly TypeLoader _typeLoader;
-        private readonly Autocompleter _autocompleter;
         private readonly AutoResetEvent _executionSignal = new AutoResetEvent(true);
 
         private Task _warmupTask;
@@ -38,7 +37,6 @@ namespace QuakeConsole
         public RoslynInterpreter()
         {
             _typeLoader = new TypeLoader(this);
-            _autocompleter = new Autocompleter(_typeLoader);
             Reset();
         }
 
@@ -68,7 +66,6 @@ namespace QuakeConsole
             if (EchoEnabled)
                 output.Append(command);
 
-
             if (!_warmupTask.IsCompleted)
                 _warmupTask.Wait();
 
@@ -76,9 +73,9 @@ namespace QuakeConsole
             {
                 try
                 {
-                    _executionSignal.WaitOne(); // TODO: timeout
+                    _executionSignal.WaitOne();
 
-                    _scriptState = await _scriptState.ContinueWithAsync(command, ScriptOptions);
+                    _scriptState = await _scriptState.ContinueWithAsync(command, ScriptOptions).ConfigureAwait(false);
                     if (_scriptState.ReturnValue != null)
                         output.Append(_scriptState.ReturnValue.ToString());
                 }
@@ -120,7 +117,7 @@ namespace QuakeConsole
         /// <param name="recursionLevel">
         /// Determines if subtypes of passed type will also be automatically added to the scripting context
         /// and if, then how many levels deep this applies.
-        /// </param>        
+        /// </param>
         public void AddType(Type type, int recursionLevel = DefaultTypeLoaderRecursionLevel) =>
             _typeLoader.AddType(type, recursionLevel);
 
@@ -160,10 +157,10 @@ namespace QuakeConsole
                 // Assignment and literal evaluation to warm up the scripting context.
                 // Without warmup, there is a considerable delay on first command evaluation.
                 _scriptState = await CSharpScript.RunAsync(
-                    code: "int quakeconsole_dummy_value = 1;",
+                    code: "int isRunning = 1;",
                     globalsType: typeof(ExpandoWrapper),
                     globals: Globals
-                );
+                ).ConfigureAwait(false);
             });
         }
 
