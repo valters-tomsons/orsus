@@ -1,10 +1,13 @@
-# What is this sorcery?
+# Quake Console
+This is a cutdown-down version of `quake-console` which targets only `DesktopGL`, removes Windows/DirectX dependencies, Python interpreter and potentially other various things.
+
+Originally created by [Jaanus Varus](https://github.com/discosultan/quake-console/).
+
+# Original Readme
 
 Quake-style console is an in-game command-line interface with swappable command interpreters. It can be used during development to easily manipulate game objects *at runtime* or allow players to enter cheat codes, for example.
 
 > Note that this project is no longer in development. I do try to fix bugs though!
-
-![HelloPython](Documentation/HelloPython.jpg)
 
 - https://www.youtube.com/watch?v=Is2m2oQ68Gc
 - https://www.youtube.com/watch?v=oVWqy16W0ak
