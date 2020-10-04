@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Input;
 using orsus_opengl.Entities;
 using orsus_opengl.Interfaces;
 using orsus_opengl.Bases;
+using orsus_opengl.Abstractions;
+using QuakeConsole;
 
 namespace orsus_opengl
 {
@@ -11,9 +13,9 @@ namespace orsus_opengl
     {
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
         private SpriteFont _spriteFont;
 
+        private readonly IConsole _console;
         private readonly IScene _scene;
         private readonly IEntity _player;
 
@@ -22,6 +24,7 @@ namespace orsus_opengl
         public OrsusGame()
         {
             _graphics = new GraphicsDeviceManager(this);
+            _console = new DropdownConsole(this);
 
             _scene = new SceneBase();
             _player = new PlayerEntity();
@@ -32,6 +35,7 @@ namespace orsus_opengl
 
         protected override void Initialize()
         {
+            _console.Initialize();
             IsFixedTimeStep = false;
             base.Initialize();
         }
@@ -50,6 +54,19 @@ namespace orsus_opengl
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            if(Keyboard.GetState().IsKeyDown(Keys.OemTilde))
+            {
+                _console.ToggleConsole();
+                base.Update(gameTime);
+                return;
+            }
+
+            if(_console.CanAcceptInput())
+            {
+                base.Update(gameTime);
+                return;
+            }
+
             if(Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 _player.WalkRight(gameTime);
@@ -67,7 +84,6 @@ namespace orsus_opengl
             }
 
             _player.Update(gameTime);
-
             base.Update(gameTime);
         }
 
@@ -84,6 +100,7 @@ namespace orsus_opengl
 
             _scene.DrawBackground(gameTime);
             _player.Draw(_spriteBatch, new Vector2(x, y));
+
             _spriteBatch.DrawString(_spriteFont, $"Framerate: {_frameRate}", new Vector2(20), Color.White);
 
             _spriteBatch.End();
