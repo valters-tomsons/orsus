@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
 
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RuntimeIdentifiers>linux-x64;win-x64</RuntimeIdentifiers>
 
     <PublishSingleFile>true</PublishSingleFile>
@@ -38,10 +38,5 @@
     <PackageReference Include="MonoGame.Extended.Animations" Version="3.7.0" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\thirdparty\quake-console\Source\MonoGame.QuakeConsole.DesktopGL.csproj" />
-    <ProjectReference Include="..\..\thirdparty\quake-console\Interpreters\RoslynInterpreter\MonoGame.QuakeConsole.RoslynInterpreter.csproj" />
   </ItemGroup>
 </Project>

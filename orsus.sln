@@ -9,12 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "orsus-vulkan", "src\orsus-v
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "orsus-opengl", "src\orsus-opengl\orsus-opengl.csproj", "{E6C89414-E113-492C-89FA-B8153C1BB9C2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "thirdparty", "thirdparty", "{CD1B345B-4B8F-40CC-844F-26E4B7C07F0E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "quake-console", "quake-console", "{9A563C5F-37C2-4E29-8F29-EC0C8B3297B6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.QuakeConsole.DesktopGL", "thirdparty\quake-console\Source\MonoGame.QuakeConsole.DesktopGL.csproj", "{5798DF77-1315-4339-B83D-095B0B93A3DC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,23 +46,9 @@ Global
 		{E6C89414-E113-492C-89FA-B8153C1BB9C2}.Release|x64.Build.0 = Release|Any CPU
 		{E6C89414-E113-492C-89FA-B8153C1BB9C2}.Release|x86.ActiveCfg = Release|Any CPU
 		{E6C89414-E113-492C-89FA-B8153C1BB9C2}.Release|x86.Build.0 = Release|Any CPU
-		{5798DF77-1315-4339-B83D-095B0B93A3DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5798DF77-1315-4339-B83D-095B0B93A3DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5798DF77-1315-4339-B83D-095B0B93A3DC}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{5798DF77-1315-4339-B83D-095B0B93A3DC}.Debug|x64.Build.0 = Debug|Any CPU
-		{5798DF77-1315-4339-B83D-095B0B93A3DC}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5798DF77-1315-4339-B83D-095B0B93A3DC}.Debug|x86.Build.0 = Debug|Any CPU
-		{5798DF77-1315-4339-B83D-095B0B93A3DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5798DF77-1315-4339-B83D-095B0B93A3DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5798DF77-1315-4339-B83D-095B0B93A3DC}.Release|x64.ActiveCfg = Release|Any CPU
-		{5798DF77-1315-4339-B83D-095B0B93A3DC}.Release|x64.Build.0 = Release|Any CPU
-		{5798DF77-1315-4339-B83D-095B0B93A3DC}.Release|x86.ActiveCfg = Release|Any CPU
-		{5798DF77-1315-4339-B83D-095B0B93A3DC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E2A24B04-1642-4D76-B78C-B022ECCD834F} = {985E1FAD-39F4-4A28-9719-F1BFC8F9EB5E}
 		{E6C89414-E113-492C-89FA-B8153C1BB9C2} = {985E1FAD-39F4-4A28-9719-F1BFC8F9EB5E}
-		{9A563C5F-37C2-4E29-8F29-EC0C8B3297B6} = {CD1B345B-4B8F-40CC-844F-26E4B7C07F0E}
-		{5798DF77-1315-4339-B83D-095B0B93A3DC} = {9A563C5F-37C2-4E29-8F29-EC0C8B3297B6}
 	EndGlobalSection
 EndGlobal

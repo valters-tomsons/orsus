@@ -4,8 +4,6 @@ using Microsoft.Xna.Framework.Input;
 using orsus_opengl.Entities;
 using orsus_opengl.Interfaces;
 using orsus_opengl.Bases;
-using orsus_opengl.Abstractions;
-using QuakeConsole;
 
 namespace orsus_opengl
 {
@@ -15,7 +13,6 @@ namespace orsus_opengl
         private SpriteBatch _spriteBatch;
         private SpriteFont _spriteFont;
 
-        private readonly IConsole _console;
         private readonly IScene _scene;
         private readonly IEntity _player;
 
@@ -24,7 +21,6 @@ namespace orsus_opengl
         public OrsusGame()
         {
             _graphics = new GraphicsDeviceManager(this);
-            _console = new DropdownConsole(this);
 
             _scene = new SceneBase();
             _player = new PlayerEntity();
@@ -35,12 +31,6 @@ namespace orsus_opengl
 
         protected override void Initialize()
         {
-            _console.Initialize();
-
-            _console.TrackVariable("player", _player);
-            _console.TrackVariable("scene", _scene);
-            _console.TrackVariable("console", _console);
-
             IsFixedTimeStep = false;
             base.Initialize();
         }
@@ -60,13 +50,6 @@ namespace orsus_opengl
                 Exit();
 
             if(Keyboard.GetState().IsKeyDown(Keys.OemTilde))
-            {
-                _console.ToggleConsole();
-                base.Update(gameTime);
-                return;
-            }
-
-            if(_console.CanAcceptInput())
             {
                 base.Update(gameTime);
                 return;
