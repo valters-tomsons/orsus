@@ -56,12 +56,15 @@ namespace orsus_opengl.Bases
             sprite.Draw(spriteBatch, Location, 0f, Scale);
         }
 
-        public void Idle()
+        public bool Idle()
         {
             if(!Attacking)
             {
                 sprite.Play("player_idle");
+                return true;
             }
+
+            return false;
         }
 
         public void SetAnimationType(AnimationType type)
@@ -95,33 +98,39 @@ namespace orsus_opengl.Bases
             sprite.Update(gameTime);
         }
 
-        public void WalkLeft(GameTime time)
+        public bool WalkLeft(GameTime time)
         {
             if(!Attacking)
             {
                 sprite.Play("player_walk");
                 Rotate = true;
                 Location.X -= Speed * time.ElapsedGameTime.Milliseconds;
+                return true;
             }
+            return false;
         }
 
-        public void WalkRight(GameTime time)
+        public bool WalkRight(GameTime time)
         {
             if(!Attacking)
             {
                 sprite.Play("player_walk");
                 Rotate = false;
                 Location.X += Speed * time.ElapsedGameTime.Milliseconds;
+                return true;
             }
+            return false;
         }
 
-        public void Attack(GameTime time)
+        public bool Attack(GameTime time)
         {
             if(!Attacking)
             {
                 Attacking = true;
                 sprite.Play("player_attack", AttackEnd);
+                return true;
             }
+            return false;
         }
 
         private void AttackEnd()

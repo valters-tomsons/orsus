@@ -4,17 +4,23 @@ using Microsoft.Xna.Framework.Input;
 using orsus_opengl.Entities;
 using orsus_opengl.Interfaces;
 using orsus_opengl.Bases;
+using MonoGame.Extended;
+using MonoGame.Extended.ViewportAdapters;
 
 namespace orsus_opengl
 {
     public class OrsusGame : Game
     {
         private readonly GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+
+        private SpriteBatch _worldBatch;
+        private SpriteBatch _uiBatch;
+
         private SpriteFont _spriteFont;
 
         private readonly IScene _scene;
         private readonly IEntity _player;
+        private OrthographicCamera _camera;
 
         private double _frameRate = 0;
 
@@ -33,14 +39,18 @@ namespace orsus_opengl
         {
             IsFixedTimeStep = false;
             base.Initialize();
+
+            var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 1920, 1080);
+            _camera = new OrthographicCamera(viewportAdapter);
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _worldBatch = new SpriteBatch(GraphicsDevice);
+            _uiBatch = new SpriteBatch(GraphicsDevice);
             _spriteFont = Content.Load<SpriteFont>("Roboto");
 
-            _scene.LoadContent(Content, _spriteBatch);
+            _scene.LoadContent(Content, _worldBatch);
             _player.LoadContent(Content);
         }
 
@@ -57,11 +67,17 @@ namespace orsus_opengl
 
             if(Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                _player.WalkRight(gameTime);
+                if(_player.WalkRight(gameTime))
+                {
+                    _camera.Move(Vector2.UnitX * 1f * gameTime.ElapsedGameTime.Milliseconds);
+                }
             }
             else if(Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                _player.WalkLeft(gameTime);
+                if(_player.WalkLeft(gameTime))
+                {
+                    _camera.Move(-Vector2.UnitX * 1f * gameTime.ElapsedGameTime.Milliseconds);
+                }
             }
             else if(Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
@@ -84,14 +100,17 @@ namespace orsus_opengl
 
             _frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
 
-            _spriteBatch.Begin(default, default, SamplerState.PointClamp, default, default, default, default);
+            _worldBatch.Begin(default, default, SamplerState.PointClamp, default, default, default, _camera.GetViewMatrix());
 
             _scene.DrawBackground(gameTime);
-            _player.Draw(_spriteBatch, new Vector2(x, y));
+            _player.Draw(_worldBatch, new Vector2(x, y));
 
-            _spriteBatch.DrawString(_spriteFont, $"Framerate: {_frameRate}", new Vector2(20), Color.White);
+            _worldBatch.End();
 
-            _spriteBatch.End();
+            _uiBatch.Begin(default, default, SamplerState.PointClamp, default, default, default, default);
+            _uiBatch.DrawString(_spriteFont, $"Framerate: {_frameRate}", new Vector2(20), Color.White);
+            _uiBatch.DrawString(_spriteFont, $"Camera: {_camera.Position}", new Vector2(40), Color.White);
+            _uiBatch.End();
 
             base.Draw(gameTime);
         }

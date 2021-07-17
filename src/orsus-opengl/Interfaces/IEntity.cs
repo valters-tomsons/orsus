@@ -12,14 +12,16 @@ namespace orsus_opengl.Interfaces
         float Speed { get; }
         Vector2 Scale { get; set; }
 
+        void Update(GameTime gameTime);
+        void LoadContent(ContentManager content);
+        void Draw(SpriteBatch spriteBatch, Vector2 position);
+
         void AddAnimationFrames(AnimationType type, ISpriteSheet spriteSheet, float frameDuration = 0.2F, bool loop = true);
         void SetAnimationType(AnimationType type);
-        void Update(GameTime gameTime);
-        void Draw(SpriteBatch spriteBatch, Vector2 position);
-        void WalkLeft(GameTime time);
-        void WalkRight(GameTime time);
-        void Idle();
-        void LoadContent(ContentManager content);
-        void Attack(GameTime time);
+
+        bool WalkLeft(GameTime time);
+        bool WalkRight(GameTime time);
+        bool Attack(GameTime time);
+        bool Idle();
     }
 }
