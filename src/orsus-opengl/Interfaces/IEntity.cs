@@ -11,6 +11,7 @@ namespace orsus_opengl.Interfaces
         AnimatedSprite CurrentAnimation { get; }
         float Speed { get; }
         Vector2 Scale { get; set; }
+        Vector2 Position { get; set; }
 
         void Update(GameTime gameTime);
         void LoadContent(ContentManager content);

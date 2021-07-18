@@ -65,25 +65,26 @@ namespace orsus_opengl
                 return;
             }
 
-            if(Keyboard.GetState().IsKeyDown(Keys.D))
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                if(_player.WalkRight(gameTime))
+                if (_player.WalkRight(gameTime))
                 {
                     _camera.Move(Vector2.UnitX * 1f * gameTime.ElapsedGameTime.Milliseconds);
                 }
             }
-            else if(Keyboard.GetState().IsKeyDown(Keys.A))
+            else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                if(_player.WalkLeft(gameTime))
+                if (_player.WalkLeft(gameTime))
                 {
                     _camera.Move(-Vector2.UnitX * 1f * gameTime.ElapsedGameTime.Milliseconds);
                 }
             }
-            else if(Mouse.GetState().LeftButton == ButtonState.Pressed)
+            else if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 _player.Attack(gameTime);
             }
-            else{
+            else
+            {
                 _player.Idle();
             }
 
@@ -101,15 +102,14 @@ namespace orsus_opengl
             _frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
 
             _worldBatch.Begin(default, default, SamplerState.PointClamp, default, default, default, _camera.GetViewMatrix());
-
             _scene.DrawBackground(gameTime);
             _player.Draw(_worldBatch, new Vector2(x, y));
-
             _worldBatch.End();
 
             _uiBatch.Begin(default, default, SamplerState.PointClamp, default, default, default, default);
             _uiBatch.DrawString(_spriteFont, $"Framerate: {_frameRate}", new Vector2(20), Color.White);
-            _uiBatch.DrawString(_spriteFont, $"Camera: {_camera.Position}", new Vector2(40), Color.White);
+            _uiBatch.DrawString(_spriteFont, $"Camera: {_camera.Position}", new Vector2(20, 40), Color.White);
+            _uiBatch.DrawString(_spriteFont, $"Player: {_player.Position}", new Vector2(20, 60), Color.White);
             _uiBatch.End();
 
             base.Draw(gameTime);

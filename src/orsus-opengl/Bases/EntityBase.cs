@@ -16,11 +16,11 @@ namespace orsus_opengl.Bases
 {
     public class EntityBase : IEntity
     {
-        public AnimatedSprite CurrentAnimation { get; private set; }
+        public AnimatedSprite CurrentAnimation { get; }
 
-        private readonly Dictionary<AnimationType, AnimatedSprite> _animations = new Dictionary<AnimationType, AnimatedSprite>();
+        private readonly Dictionary<AnimationType, AnimatedSprite> _animations = new();
 
-        public Vector2 Location;
+        public Vector2 Position { get; set; }
 
         public float Speed { get; set; }
         public Vector2 Scale { get; set; } = new Vector2(1);
@@ -47,13 +47,13 @@ namespace orsus_opengl.Bases
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            if (Location == default)
+            if (Position == default)
             {
-                Location = position;
+                Position = position;
             }
 
             // CurrentAnimation.Draw(spriteBatch, Location, 0f, Scale);
-            sprite.Draw(spriteBatch, Location, 0f, Scale);
+            sprite.Draw(spriteBatch, Position, 0f, Scale);
         }
 
         public bool Idle()
@@ -87,14 +87,6 @@ namespace orsus_opengl.Bases
                 sprite.Effect = SpriteEffects.None;
             }
 
-            if (Attacking)
-            {
-                // SetAnimationType(AnimationType.Attack1);
-                // CurrentAnimation.Play(nameof(AnimationType.Attack1));
-                // Attacking = false;
-            }
-
-            // CurrentAnimation.Update(gameTime);
             sprite.Update(gameTime);
         }
 
@@ -104,7 +96,8 @@ namespace orsus_opengl.Bases
             {
                 sprite.Play("player_walk");
                 Rotate = true;
-                Location.X -= Speed * time.ElapsedGameTime.Milliseconds;
+                // Position.X -= Speed * time.ElapsedGameTime.Milliseconds;
+                Position = new Vector2(Position.X - (Speed * time.ElapsedGameTime.Milliseconds), Position.Y);
                 return true;
             }
             return false;
@@ -116,7 +109,8 @@ namespace orsus_opengl.Bases
             {
                 sprite.Play("player_walk");
                 Rotate = false;
-                Location.X += Speed * time.ElapsedGameTime.Milliseconds;
+                Position = new Vector2(Position.X + (Speed * time.ElapsedGameTime.Milliseconds), Position.Y);
+                // Position.X += Speed * time.ElapsedGameTime.Milliseconds;
                 return true;
             }
             return false;
